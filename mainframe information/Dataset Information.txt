@@ -1,0 +1,6 @@
+Z88116.BANK.INPUT (LRECL=80, RECFM=FB) 
+Z88116.BANK.OUTPUT
+
+
+zowe zos-files create data-set-sequential "Z88116.BANK.INPUT" --size 1TRK --lrecl 80 --recfm FB --block-size 800
+zowe zos-files create data-set-sequential "Z88116.BANK.OUTPUT" --size 1TRK --lrecl 80 --recfm FB --block-size 800

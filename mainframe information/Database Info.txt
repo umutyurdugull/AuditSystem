@@ -1,0 +1,1 @@
+Database Info: Db2 z/OS V13, Creator: Z88116, DB: Z88116, Table: Z88116.BANK_TRANSACTIONS
