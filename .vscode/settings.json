@@ -1,0 +1,22 @@
+{
+    "coboleditor.cpy-paths": [
+        "cobol",
+        "AuditSystem/cobol",
+        "."
+    ],
+    "zopeneditor.cobol.cpy-paths": [
+        "cobol",
+        "AuditSystem/cobol",
+        "."
+    ],
+    "zopeneditor.propertygroups": [
+        {
+            "name": "COBOL Property Group",
+            "language": "cobol",
+            "syslib": [
+                "cobol",
+                "."
+            ]
+        }
+    ]
+}

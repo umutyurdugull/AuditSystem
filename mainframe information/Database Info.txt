@@ -1,1 +1,6 @@
 Database Info: Db2 z/OS V13, Creator: Z88116, DB: Z88116, Table: Z88116.BANK_TRANSACTIONS
+
+Column Descriptions:
+TX_AMOUNT (DECIMAL 11,2): Transaction amount (e.g. 15500.50 TL).
+TX_TYPE (CHAR 2): Transaction type ('DR' = Debit/Withdrawal, 'CR' = Credit/Deposit).
+TX_DATE (DATE): Transaction date 
