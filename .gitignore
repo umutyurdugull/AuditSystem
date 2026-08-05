@@ -1,0 +1,13 @@
+# IBM Proprietary Libraries
+lib/ibmjzos.jar
+*.jar
+
+# Build & Class Outputs
+*.class
+out/
+target/
+
+# IDE Files
+.idea/
+*.iml
+.vscode/
