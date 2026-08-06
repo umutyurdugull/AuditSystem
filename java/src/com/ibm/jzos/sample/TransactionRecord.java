@@ -14,4 +14,9 @@ public class TransactionRecord {
         this.txType = txType;
         this.status = status;
     }
+
+    @Override
+    public String toString(){
+        return "Account: " + accountId + " | Client: " + lastName + " | Amount: " + amount + " | Type: " + txType + " | Status: " + status;
+    }
 }

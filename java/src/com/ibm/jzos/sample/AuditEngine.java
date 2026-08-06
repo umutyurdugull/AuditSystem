@@ -1,39 +1,31 @@
 package com.ibm.jzos.sample;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.ibm.jzos.ZFile;
-import com.ibm.jzos.ZFileException;
-import com.ibm.jzos.FileFactory;
-import com.ibm.jzos.MvsJobSubmitter;
-import com.ibm.jzos.PdsDirectory;
-import com.ibm.jzos.ZFileConstants;
 
+import com.ibm.jzos.FileFactory;
 
 
 public class AuditEngine {
     private static final String DB2_URL = "jdbc:db2://204.90.115.200:5040/ZXPDB2";
     private static final String DB2_USER = "Z88116";
-    private static final String DB_PASSWORD = "";
+    private static final String DB2_PASSWORD = "RHA95XVB";
     private static final String COBOL_OUTPUT_DS = "//'Z88116.BANK.OUTPUT'";
 
     public static void main(String[] args) {
 
-       try {
-           List<TransactionRecord> records = readCobolOutputDataset();
+        try {
+            List<TransactionRecord> records = readCobolOutputDataset();
+            System.out.println(records.toString());
+            System.out.println("---");
+            insertIntoDb2();
 
-       }
-       catch (Exception ex){
-           System.out.println(ex.toString());
-       }
+        }
+        catch (Exception ex){
+            System.out.println(ex.toString());
+        }
 
     }
 
@@ -54,5 +46,32 @@ public class AuditEngine {
             }
         }
         return records;
+    }
+    private static void insertIntoDb2() throws SQLException{
+
+
+        // TO TRY DB2, it's a dummy code i'll rewrite it when I need it.
+        String query = "SELECT * FROM Z88116.BANK_TRANSACTIONS";
+        try(Connection connection = DriverManager.getConnection(DB2_URL,DB2_USER, DB2_PASSWORD)){
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet results = statement.executeQuery();
+            while (results.next()){
+                String accId    = results.getString("ACCOUNT_ID");
+                String custName = results.getString("CUSTOMER_NAME");
+                double amount = results.getDouble("TX_AMOUNT");
+                String txType = results.getString("TX_TYPE");
+                Date txDate     = results.getDate("TX_DATE");
+                String status = results.getString("STATUS");
+
+                System.out.println("Account: " + accId +
+                        " | Customer: " + custName +
+                        " | Amount: " + amount +
+                        " | Type: " + txType +
+                        " | Date: " + txDate +
+                        " | Status: " + status);
+                System.out.println(custName);
+            }
+
+        }
     }
 }
